@@ -1,0 +1,63 @@
+Traversal - Preorder, Inorder, Postorder
+//Preorder
+void preorder(TreeNode *root, vector<int> &ans){
+    while(root==NULL) return;
+    ans.push_back(root->data);
+    preorder(root->left, ans);
+    preorder(root->right, ans);
+}
+vector<int> getPreOrderTraversal(TreeNode *root)
+{
+    vector<int> ans;
+    preorder(root,ans);
+    return ans;
+}
+
+//Inorder
+void inorder(TreeNode *root, vector<int> &ans){
+    if(root==NULL) return;
+    inorder(root->left,ans);
+    ans.push_back(root->data);
+    inorder(root->right,ans);
+}
+vector<int> getInOrderTraversal(TreeNode *root)
+{
+    vector<int> ans;
+    inorder(root, ans);
+    return ans;
+}
+
+//Postorder
+void postorder(TreeNode *root, vector<int> &ans){
+    if(root==NULL) return;
+    postorder(root->left, ans);
+    postorder(root->right, ans);
+    ans.push_back(root->data);
+}
+vector<int> getPostOrderTraversal(TreeNode *root)
+{
+    vector<int> ans;
+    postorder(root, ans);
+    return ans;
+}
+
+//Level order traversal
+vector<int> getLevelOrder(BinaryTreeNode<int> *root)
+{
+    vector<int> ans;
+    if(root==NULL) return ans;
+    queue<BinaryTreeNode<int>*> q;
+    q.push(root);
+    while(!q.empty()){
+         BinaryTreeNode<int>*temp=q.front();
+         ans.push_back(temp->val);
+         q.pop();
+         if(temp->left){
+             q.push(temp->left);
+         }
+         if(temp->right){
+             q.push(temp->right);
+        }
+    }
+    return ans;
+}
